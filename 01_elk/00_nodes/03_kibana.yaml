@@ -35,8 +35,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kibana
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
   namespace: elasticsearch
   labels:
     component: elasticsearch
