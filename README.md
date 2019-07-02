@@ -5,8 +5,8 @@
 
 **Code examples for:**
 
- -  Installing and configuring K8S on aws with Terraform and Rancher
  -  Configure ELK and Prometheus using HELM to log and monitoring K8S infra & services
+    - Prom and grafna installed
  -  Authentication in K8S
 	 -  Basic
 	 - OpenLD
@@ -21,4 +21,14 @@
  - Ingress controllers and API GW
  - 
 
+
+TODO:
+Install Helm
+kubectl -n kube-system create serviceaccount tiller
+ kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+ helm init --service-account=tiller
+
+
 > Written with [StackEdit](https://stackedit.io/).
+
+

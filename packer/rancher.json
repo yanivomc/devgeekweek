@@ -1,0 +1,35 @@
+{
+    "variables": {
+        "container": "{{ env `BOOTSTRAP_CONTAINER` }}"
+    },
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "name": "builder-pv",
+            "region": "eu-west-1",
+            "source_ami": "ami-81fa71f6",
+            "instance_type": "t1.micro",
+            "ssh_username": "ubuntu",
+            "ami_name": "packer-based-rancher-os-pv-builder {{timestamp}}",
+            "ssh_keypair_name": "./devgeekweek.pem",
+            "ssh_private_key_file": "./devgeekweek.pem"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+                "sudo su - root",
+                "apt-get update && apt-get install -y curl",
+                "curl -o /tmp/docker-install.sh -sSL https://get.docker.com",
+                "chmod +x /tmp/docker-install.sh && /tmp/docker-install.sh"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo docker run -it --privileged {{ user `container` }} -d /dev/xvda -t bootstrap"
+            ]
+        }
+    ]
+}
