@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: elasticsearch
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: es-kibana
+  namespace: elasticsearch
+  labels:
+    component: elasticsearch
+    role: kibana
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: elasticsearch
+        role: kibana
+    spec:
+      containers:
+      - name: es-kibana
+        image: docker.elastic.co/kibana/kibana:7.2.0
+        env:
+        - name: CLUSTER_NAME
+          value: my-es
+        - name: ELASTICSEARCH_HOSTS
+          value: http://elasticsearch:9200
+        ports:
+        - containerPort: 5601
+          name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
+  namespace: elasticsearch
+  labels:
+    component: elasticsearch
+    role: kibana
+spec:
+  selector:
+    component: elasticsearch
+    role: kibana
+  ports:
+  - name: http
+    port: 80
+    targetPort: 5601
+    protocol: TCP
+  type: LoadBalancer
