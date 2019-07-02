@@ -108,6 +108,8 @@ data:
         - __meta_kubernetes_service_name
         target_label: kubernetes_name
 
+ 
+ 
     - job_name: kubernetes-services
       kubernetes_sd_configs:
       - role: service
