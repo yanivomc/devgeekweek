@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: prometheus-service
   namespace: monitoring
+  labels:
+    app: prometheus-server
   annotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path:   /
@@ -11,7 +13,7 @@ metadata:
 spec:
   selector: 
     app: prometheus-server
-  type: NodePort  
+  type: LoadBalancer  
   ports:
     - port: 8080
       targetPort: 9090 
