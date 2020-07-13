@@ -14,5 +14,5 @@ spec:
   clusterIP: None
   selector:
     {{- include "grafana.selectorLabels" . | nindent 4 }}
-  type: ClusterIP
+  type: LoadBalancer
 {{- end }}
