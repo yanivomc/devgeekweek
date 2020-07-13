@@ -8,7 +8,7 @@ nameOverride: ""
 
 ## Provide a k8s version to auto dashboard import script example: kubeTargetVersionOverride: 1.16.6
 ##
-kubeTargetVersionOverride: ""
+kubeTargetVersionOverride: "1.17.8"
 
 ## Provide a name to substitute for the full names of resources
 ##
@@ -1718,7 +1718,7 @@ prometheus:
     # - url: http://remote1/push
 
     ## Enable/Disable Grafana dashboards provisioning for prometheus remote write feature
-    remoteWriteDashboards: false
+    remoteWriteDashboards: true
 
     ## Resource limits & requests
     ##
