@@ -23,7 +23,8 @@ do
                 --dns private \
                 --dns-zone $DNS_ZONE \
                 --master-size=t2.small \
-                --node-size=t2.medium \
+                --node-size=t2.large \
+                --node-size=t2.large \
                 --zones $ZONES \
                 --topology public \
                 --node-count=1 \
