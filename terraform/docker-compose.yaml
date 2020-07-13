@@ -1,0 +1,11 @@
+version: '3' 
+# WHAT DO ME TO BUILD (VOLUMES / NETWORK)
+services:
+  terraform:
+    build: ./
+    image: yanivomc/terraform-devopshift:latest
+    container_name: "yourname"
+    entrypoint: ["sleep","36000"]
+    environment:
+      - AWS_ACCESS_KEY_ID=xxxx
+      - AWS_SECRET_ACCESS_KEY=xxxx
